@@ -1,0 +1,40 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - name: Init new repo in dist folder and commit generated files
+        run: |
+          cd ./Website
+          git init
+          git add .
+          git config --local user.email "bhattacharyasaptarshi2001@gmail.com"
+          git config --local user.name "Saptarshi"
+          git commit -m 'deploy'
+
+      - name: Add safe.directory exception
+        run: git config --global --add safe.directory /github/workspace/Website
+
+      - name: Force push to destination branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          force: true
+          directory: ./Website
