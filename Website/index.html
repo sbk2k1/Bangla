@@ -2,359 +2,355 @@
 <html lang="en">
 
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>বাংলা লেখার দাবি</title>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলা লেখার দাবি</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
- <style>
-  body {
-   font-family: Arial, sans-serif;
-   margin: 0;
-   padding: 0;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: space-between;
-   min-height: 100vh;
-   background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
-  }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+        }
 
-  .editor-container {
-   width: 90%;
-   height: 72vh;
-   background: #ffffff;
-   border-radius: 20px;
-   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-   padding: 25px;
-   margin: 40px 0;
-   display: flex;
-   flex-direction: column;
-  }
+        .editor-container {
+            width: 90%;
+            height: 72vh;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin: 40px 0;
+            display: flex;
+            flex-direction: column;
+        }
 
-  .editor-toolbar {
-   display: flex;
-   justify-content: center;
-   gap: 10px;
-   margin-bottom: 20px;
-   padding: 10px;
-   background: #f8f9fa;
-   border-radius: 12px;
-  }
+        .editor-toolbar {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
 
-  .editor-toolbar button {
-   padding: 8px 16px;
-   border: none;
-   background-color: #ffffff;
-   color: #2196F3;
-   font-size: 14px;
-   border-radius: 8px;
-   box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
-   cursor: pointer;
-   transition: all 0.2s ease;
-  }
+        .editor-toolbar button {
+            padding: 8px 16px;
+            border: none;
+            background-color: #ffffff;
+            color: #2196F3;
+            font-size: 14px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-  .editor-toolbar button:hover {
-   background-color: #2196F3;
-   color: #ffffff;
-   transform: translateY(-1px);
-  }
+        .editor-toolbar button:hover {
+            background-color: #2196F3;
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
 
-  #text-editor {
-   flex: 1;
-   width: 100%;
-   border-radius: 12px;
-   padding: 20px;
-   font-size: 16px;
-   line-height: 1.6;
-   outline: none;
-   overflow-y: auto;
-   background: #f8f9fa;
-   border: 1px solid #e9ecef;
-   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-   box-sizing: border-box;
-  }
+        #text-editor {
+            flex: 1;
+            width: 100%;
+            border-radius: 12px;
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+            outline: none;
+            overflow-y: auto;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            box-sizing: border-box;
+        }
 
-  .save-button {
-   display: block;
-   margin: 20px auto 0;
-   padding: 12px 30px;
-   background-color: #2196F3;
-   color: white;
-   font-size: 16px;
-   border: none;
-   border-radius: 10px;
-   cursor: pointer;
-   transition: all 0.2s ease;
-   box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
-  }
+        .save-button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 30px;
+            background-color: #2196F3;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+        }
 
-  .save-button:hover {
-   background-color: #1976D2;
-   transform: translateY(-2px);
-   box-shadow: 0 6px 16px rgba(33, 150, 243, 0.3);
-  }
+        .save-button:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(33, 150, 243, 0.3);
+        }
 
-  footer {
-   font-size: 14px;
-   color: #37474F;
-   margin: 20px 0;
-   padding: 10px;
-   text-align: center;
-  }
- </style>
+        footer {
+            font-size: 14px;
+            color: #37474F;
+            margin: 20px 0;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
- <div class="editor-container">
-  <div class="editor-toolbar">
-   <button onclick="applyStyle('bold')">Bold</button>
-   <button onclick="applyStyle('italic')">Italic</button>
-   <button onclick="applyStyle('underline')">Underline</button>
-   <button onclick="cycleFontSize()">Font Size</button>
-  </div>
-  <div id="text-editor" contenteditable="true">
-   <p></p>
-  </div>
-  <button class="save-button" onclick="saveToPDF()">Save to PDF</button>
- </div>
- <footer>© 2024: বাংলা লেখার দাবি</footer>
+    <div class="editor-container">
+        <div class="editor-toolbar">
+            <button onclick="applyStyle('bold')">Bold</button>
+            <button onclick="applyStyle('italic')">Italic</button>
+            <button onclick="applyStyle('underline')">Underline</button>
+            <button onclick="cycleFontSize()">Font Size</button>
+        </div>
+        <div id="text-editor" contenteditable="true">
+            <p></p>
+        </div>
+        <button class="save-button" onclick="saveToPDF()">Save to PDF</button>
+    </div>
+    <footer>© 2024: বাংলা লেখার দাবি</footer>
 
- <script>
-  const apiUrl = 'https://inputtools.google.com/request';
-  let lastWord = "";
-  let fontSizeStep = 1;
+    <script>
+        const apiUrl = 'https://inputtools.google.com/request';
+        let lastWord = "";
+        let fontSizeStep = 1;
 
-  function findLastTextNode(node) {
-   if (node.nodeType === Node.TEXT_NODE) {
-    return node;
-   }
-   for (let i = node.childNodes.length - 1; i >= 0; i--) {
-    const lastTextNode = findLastTextNode(node.childNodes[i]);
-    if (lastTextNode) {
-     return lastTextNode;
-    }
-   }
-   return null;
-  }
+        function findLastTextNode(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                return node;
+            }
+            for (let i = node.childNodes.length - 1; i >= 0; i--) {
+                const lastTextNode = findLastTextNode(node.childNodes[i]);
+                if (lastTextNode) {
+                    return lastTextNode;
+                }
+            }
+            return null;
+        }
 
-  function getCurrentFormatting() {
-   const selection = window.getSelection();
-   if (!selection.rangeCount) return null;
+        function getCurrentFormatting() {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return null;
 
-   const range = selection.getRangeAt(0);
-   let currentNode = range.startContainer;
+            const range = selection.getRangeAt(0);
+            let currentNode = range.startContainer;
 
-   // If the current node is a text node, get its parent
-   if (currentNode.nodeType === Node.TEXT_NODE) {
-    currentNode = currentNode.parentNode;
-   }
+            // If the current node is a text node, get its parent
+            if (currentNode.nodeType === Node.TEXT_NODE) {
+                currentNode = currentNode.parentNode;
+            }
 
-   return {
-    bold: window.getComputedStyle(currentNode).fontWeight === 'bold' || currentNode.closest('b'),
-    italic: window.getComputedStyle(currentNode).fontStyle === 'italic' || currentNode.closest('i'),
-    underline: window.getComputedStyle(currentNode).textDecoration.includes('underline') || currentNode.closest('u'),
-    fontSize: currentNode.style.fontSize || window.getComputedStyle(currentNode).fontSize
-   };
-  }
+            return {
+                bold: window.getComputedStyle(currentNode).fontWeight === 'bold' || currentNode.closest('b'),
+                italic: window.getComputedStyle(currentNode).fontStyle === 'italic' || currentNode.closest('i'),
+                underline: window.getComputedStyle(currentNode).textDecoration.includes('underline') || currentNode.closest('u'),
+                fontSize: currentNode.style.fontSize || window.getComputedStyle(currentNode).fontSize
+            };
+        }
 
-  document.getElementById('text-editor').addEventListener('keyup', async function (e) {
-   if (e.ctrlKey || e.shiftKey) {
-    lastWord = "";
-    return;
-   }
+        document.getElementById('text-editor').addEventListener('keyup', async function (e) {
+            if (e.ctrlKey || e.shiftKey) {
+                lastWord = "";
+                return;
+            }
 
-   if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-    lastWord = "";
-    return;
-   }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                lastWord = "";
+                return;
+            }
 
-   if (e.key === '|' || e.key === '.' || e.key === ',' || e.key === '!' || e.key === '?' || e.key === ':' || e.key === ';') {
-    if (lastWord.length > 0) {
-     lastWord = lastWord.slice(0, -1);
-    } else {
-     return;
-    }
-   }
+            if (e.key === '|' || e.key === '.' || e.key === ',' || e.key === '!' || e.key === '?' || e.key === ':' || e.key === ';') {
+                if (lastWord.length > 0) {
+                    lastWord = lastWord.slice(0, -1);
+                } else {
+                    return;
+                }
+            }
 
-   if (e.key !== ' ') {
-    if (e.key.length === 1) {
-     lastWord += e.key;
-    }
-    return;
-   }
+            // Only process if space is pressed and we have a word to translate
+            if (e.key === ' ' && lastWord.trim()) {
+                try {
+                    const selection = window.getSelection();
+                    if (!selection.rangeCount) return;
 
-   if (!lastWord.trim()) {
-    lastWord = "";
-    return;
-   }
+                    const range = selection.getRangeAt(0);
+                    const currentFormatting = getCurrentFormatting();
 
-   try {
-    const selection = window.getSelection();
-    if (!selection.rangeCount) return;
+                    const response = await fetch(`${apiUrl}?text=${encodeURIComponent(lastWord)}&itc=bn-t-i0-und&num=4&cp=0&cs=1&ie=utf-8&oe=utf-8&app=demopage`);
+                    const data = await response.json();
 
-    const range = selection.getRangeAt(0);
-    const currentFormatting = getCurrentFormatting();
+                    if (data[0] === 'SUCCESS') {
+                        const bengaliWord = data[1][0][1][0];
 
-    const response = await fetch(`${apiUrl}?text=${encodeURIComponent(lastWord)}&itc=bn-t-i0-und&num=4&cp=0&cs=1&ie=utf-8&oe=utf-8&app=demopage`);
-    const data = await response.json();
+                        // Create a new span for the Bengali word
+                        const formattedSpan = document.createElement('span');
+                        formattedSpan.textContent = bengaliWord;
 
-    if (data[0] === 'SUCCESS') {
-     const bengaliWord = data[1][0][1][0];
+                        if (currentFormatting) {
+                            if (currentFormatting.bold) formattedSpan.style.fontWeight = 'bold';
+                            if (currentFormatting.italic) formattedSpan.style.fontStyle = 'italic';
+                            if (currentFormatting.underline) formattedSpan.style.textDecoration = 'underline';
+                            if (currentFormatting.fontSize) formattedSpan.style.fontSize = currentFormatting.fontSize;
+                        }
 
-     // Create a new span with the current formatting
-     const formattedSpan = document.createElement('span');
-     formattedSpan.textContent = bengaliWord;
+                        const textNode = range.startContainer;
+                        const text = textNode.textContent;
 
-     if (currentFormatting) {
-      if (currentFormatting.bold) formattedSpan.style.fontWeight = 'bold';
-      if (currentFormatting.italic) formattedSpan.style.fontStyle = 'italic';
-      if (currentFormatting.underline) formattedSpan.style.textDecoration = 'underline';
-      if (currentFormatting.fontSize) formattedSpan.style.fontSize = currentFormatting.fontSize;
-     }
+                        // Remove the English word and any existing space
+                        const startOffset = Math.max(0, range.startOffset - lastWord.length - 1);
+                        const beforeText = text.substring(0, startOffset);
+                        const afterText = text.substring(range.startOffset);
 
-     const textNode = range.startContainer;
-     const text = textNode.textContent;
-     const startOffset = Math.max(0, range.startOffset - lastWord.length - 1);
+                        // Replace content
+                        textNode.textContent = beforeText;
 
-     // Check if we're at the end of the content
-     const isAtEnd = range.startOffset >= text.length;
+                        // Insert Bengali word
+                        textNode.parentNode.insertBefore(formattedSpan, textNode.nextSibling);
 
-     // Split the text and replace the last word
-     const beforeText = text.substring(0, startOffset);
-     const afterText = text.substring(range.startOffset);
+                        // Create and insert a dedicated space node
+                        const spaceNode = document.createTextNode('\u00A0'); // Using non-breaking space
+                        textNode.parentNode.insertBefore(spaceNode, formattedSpan.nextSibling);
 
-     // Clear the original text node
-     textNode.textContent = beforeText;
+                        // Add remaining text
+                        if (afterText) {
+                            const afterTextNode = document.createTextNode(afterText);
+                            textNode.parentNode.insertBefore(afterTextNode, spaceNode.nextSibling);
+                        }
 
-     // Insert the formatted Bengali word
-     textNode.parentNode.insertBefore(formattedSpan, textNode.nextSibling);
+                        // Position cursor after the space
+                        const newRange = document.createRange();
+                        newRange.setStartAfter(spaceNode);
+                        newRange.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(newRange);
 
-     // Always add a space after the Bengali word
-     const spaceNode = document.createTextNode(' ');
-     textNode.parentNode.insertBefore(spaceNode, formattedSpan.nextSibling);
+                        // Ensure there's a text node for future typing
+                        if (!spaceNode.nextSibling || spaceNode.nextSibling.nodeType !== Node.TEXT_NODE) {
+                            const endTextNode = document.createTextNode('');
+                            textNode.parentNode.insertBefore(endTextNode, spaceNode.nextSibling);
+                        }
 
-     // If there's text after the word and we're not at the end, add it back
-     if (afterText && !isAtEnd) {
-      const afterTextNode = document.createTextNode(afterText);
-      textNode.parentNode.insertBefore(afterTextNode, spaceNode.nextSibling);
-     }
+                        e.preventDefault();
+                    }
+                } catch (error) {
+                    console.error('Error transliterating word:', error);
+                }
 
-     // Set cursor position after the space
-     const newRange = document.createRange();
-     newRange.setStartAfter(spaceNode);
-     newRange.collapse(true);
-     selection.removeAllRanges();
-     selection.addRange(newRange);
+                lastWord = "";
+                return;
+            }
 
-     // If we're at the end, ensure we have a proper text node for future typing
-     if (isAtEnd) {
-      const endTextNode = document.createTextNode('');
-      textNode.parentNode.insertBefore(endTextNode, spaceNode.nextSibling);
-     }
-    }
-   } catch (error) {
-    console.error('Error transliterating word:', error);
-   }
+            // Continue building the word for non-space characters
+            if (e.key !== ' ' && e.key.length === 1) {
+                lastWord += e.key;
+            }
+        });
 
-   lastWord = "";
-  });
+        function applyStyle(command) {
+            document.execCommand(command, false, null);
+        }
 
-  function applyStyle(command) {
-   document.execCommand(command, false, null);
-  }
+        function cycleFontSize() {
+            const sizes = ['16px', '20px', '24px'];
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
 
-  function cycleFontSize() {
-   const sizes = ['16px', '20px', '24px'];
-   const selection = window.getSelection();
-   if (!selection.rangeCount) return;
+            const range = selection.getRangeAt(0);
+            const span = document.createElement('span');
+            span.style.fontSize = sizes[fontSizeStep % sizes.length];
 
-   const range = selection.getRangeAt(0);
-   const span = document.createElement('span');
-   span.style.fontSize = sizes[fontSizeStep % sizes.length];
+            if (range.collapsed) {
+                // If no text is selected, create a new span at cursor position
+                range.insertNode(span);
+            } else {
+                // If text is selected, wrap it in the span
+                range.surroundContents(span);
+            }
 
-   if (range.collapsed) {
-    // If no text is selected, create a new span at cursor position
-    range.insertNode(span);
-   } else {
-    // If text is selected, wrap it in the span
-    range.surroundContents(span);
-   }
+            fontSizeStep++;
+        }
 
-   fontSizeStep++;
-  }
+        async function saveToPDF() {
+            try {
+                // Create a temporary div for capturing
+                const tempDiv = document.createElement('div');
+                tempDiv.style.width = '800px';
+                tempDiv.style.padding = '20px';
+                tempDiv.style.fontFamily = 'Noto Sans Bengali';
 
-  async function saveToPDF() {
-  try {
-    // Create a temporary div for capturing
-    const tempDiv = document.createElement('div');
-    tempDiv.style.width = '800px';
-    tempDiv.style.padding = '20px';
-    tempDiv.style.fontFamily = 'Noto Sans Bengali';
-    
-    // Copy the content
-    const content = document.getElementById('text-editor').cloneNode(true);
-    tempDiv.appendChild(content);
-    
-    // Temporarily append to document for capturing
-    document.body.appendChild(tempDiv);
-    
-    // Use html2canvas to capture the content
-    const canvas = await html2canvas(tempDiv, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      fontFamily: 'Noto Sans Bengali'
-    });
-    
-    // Remove temporary div
-    document.body.removeChild(tempDiv);
-    
-    // Create PDF
-    const { jsPDF } = window.jspdf;
-    const imgWidth = 210; // A4 width in mm
-    const pageHeight = 297; // A4 height in mm
-    const imgHeight = canvas.height * imgWidth / canvas.width;
-    const doc = new jsPDF('p', 'mm');
-    
-    let heightLeft = imgHeight;
-    let position = 0;
-    
-    // Add first page
-    doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-    
-    // Add subsequent pages if needed
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      doc.addPage();
-      doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
-    
-    // Save the PDF
-    doc.save('bengali-text.pdf');
-    
-  } catch (error) {
-    console.error('Error generating PDF:', error);
-    alert('Error generating PDF. Please try again.');
-  }
-}
+                // Copy the content
+                const content = document.getElementById('text-editor').cloneNode(true);
+                tempDiv.appendChild(content);
+
+                // Temporarily append to document for capturing
+                document.body.appendChild(tempDiv);
+
+                // Use html2canvas to capture the content
+                const canvas = await html2canvas(tempDiv, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    fontFamily: 'Noto Sans Bengali'
+                });
+
+                // Remove temporary div
+                document.body.removeChild(tempDiv);
+
+                // Create PDF
+                const { jsPDF } = window.jspdf;
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 297; // A4 height in mm
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                const doc = new jsPDF('p', 'mm');
+
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                // Add first page
+                doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                // Add subsequent pages if needed
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    doc.addPage();
+                    doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                // Save the PDF
+                doc.save('bengali-text.pdf');
+
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Error generating PDF. Please try again.');
+            }
+        }
 
 
-  // Initialize with a paragraph element to ensure proper text node handling
-  window.onload = function () {
-   const editor = document.getElementById('text-editor');
-   if (!editor.firstChild || editor.firstChild.nodeName !== 'P') {
-    const p = document.createElement('p');
-    if (editor.firstChild) {
-     p.appendChild(editor.firstChild);
-    }
-    editor.appendChild(p);
-   }
-  };
- </script>
+        // Initialize with a paragraph element to ensure proper text node handling
+        window.onload = function () {
+            const editor = document.getElementById('text-editor');
+            if (!editor.firstChild || editor.firstChild.nodeName !== 'P') {
+                const p = document.createElement('p');
+                if (editor.firstChild) {
+                    p.appendChild(editor.firstChild);
+                }
+                editor.appendChild(p);
+            }
+        };
+    </script>
 </body>
 
 </html>
