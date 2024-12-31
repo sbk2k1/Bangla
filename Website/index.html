@@ -12,23 +12,25 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 20px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
             min-height: 100vh;
-            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            max-height: 100vh;
+            background: linear-gradient(135deg, #3d4246, #293035);
+            overflow: hidden;
+            box-sizing: border-box;
         }
 
         .editor-container {
             width: 90%;
-            height: 72vh;
+            height: 85vh;
             background: #ffffff;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             padding: 25px;
-            margin: 40px 0;
+            margin: 0;
             display: flex;
             flex-direction: column;
         }
@@ -41,6 +43,7 @@
             padding: 10px;
             background: #f8f9fa;
             border-radius: 12px;
+            flex-shrink: 0;
         }
 
         .editor-toolbar button {
@@ -88,6 +91,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+            flex-shrink: 0;
         }
 
         .save-button:hover {
@@ -98,10 +102,11 @@
 
         footer {
             font-size: 14px;
-            color: #37474F;
-            margin: 20px 0;
-            padding: 10px;
+            color: #ffffff;
+            margin-top: 10px;
+            padding: 5px;
             text-align: center;
+            flex-shrink: 0;
         }
     </style>
 </head>
